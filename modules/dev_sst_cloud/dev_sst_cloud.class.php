@@ -162,9 +162,7 @@ function admin(&$out) {
 			$i++;
 		}
 	}
- }
- if ($this->view_mode=='cloud_get_all') {
-	$this->cloud_get_all($out);
+	$this->cloud_get_all('all');
  }
  if ($this->view_mode=='logout') {
 	$host='http://api.sst-cloud.com/auth/logout/';
