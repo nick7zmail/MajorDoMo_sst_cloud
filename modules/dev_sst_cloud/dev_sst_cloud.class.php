@@ -139,7 +139,10 @@ function admin(&$out) {
 	curl_setopt($curl, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 	$response = curl_exec($ch);
-	[$headers, $body] = explode("\r\n\r\n", $response, 2);
+	$response=explode("\r\n\r\n", $response, 2);
+	$headers=$response[0];
+	$body=$response[1];
+	//[$headers, $body] = explode("\r\n\r\n", $response, 2);
 	curl_close($ch);
 	print_r($headers);
 	$resp=json_decode($body, TRUE);
