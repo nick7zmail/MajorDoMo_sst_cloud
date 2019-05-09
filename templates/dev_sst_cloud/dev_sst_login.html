@@ -1,0 +1,50 @@
+<style>
+.form-signin {
+  text-align: center;
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  padding-top: 40px;
+  margin: auto;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
+<form class="form-signin">
+  <img class="mb-4" src="/img/dev_sst_cloud/logo.png" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+[#if LOGINERROR=1#]
+[#begin LOGINERRORS#]
+  <div class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <strong>[#ERRKEY#]</strong> [#ERRVAL#]
+  </div>
+[#end LOGINERRORS#]
+[#endif LOGINERROR#]
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <input type="email" name="login" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <input type="hidden" name="view_mode" value="update_settings">
+  <p class="mt-5 mb-3 text-muted">@nick7zmail</p>
+</form>
