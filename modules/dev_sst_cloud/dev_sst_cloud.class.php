@@ -152,6 +152,7 @@ function admin(&$out) {
 		$this->config['LOGIN']=$login;
 		$this->saveConfig();
 		$out['LOGINED']='true';
+		$this->cloud_get_all('all');
 		$this->redirect("?");
 	} else {
 		$out['LOGINERROR']=1;
@@ -162,7 +163,6 @@ function admin(&$out) {
 			$i++;
 		}
 	}
-	$this->cloud_get_all('all');
  }
  if ($this->view_mode=='logout') {
 	$host='http://api.sst-cloud.com/auth/logout/';

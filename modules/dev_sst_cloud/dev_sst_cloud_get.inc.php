@@ -68,8 +68,8 @@ foreach($houses as $house) {
 			}		
 		}
 	}
+//devices
 	if($upd='all' || $upd='devices') {
-	//devices
 		$host='http://api.sst-cloud.com/houses/'.$house['HOUSE_ID'].'/devices/';
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "$host");
