@@ -99,11 +99,14 @@ foreach($houses as $house) {
 				$rec['ID']=SQLInsert('dev_sst_cloud_devices', $rec);
 			}	
 			foreach($parsed_conf['settings'] as $k=>$v){	
-				$datarec=SQLSelectOne("SELECT ID FROM dev_sst_cloud_data WHERE DEVICE_ID='".$rec['ID']."' AND TITLE='".$k."'");
+				$datarec=SQLSelectOne("SELECT ID, LINKED_OBJECT, LINKED_PROPERTY FROM dev_sst_cloud_data WHERE DEVICE_ID='".$rec['ID']."' AND TITLE='".$k."'");
 				$datarec['TITLE']=$k;
 				$datarec['VALUE']=$v;
 				$datarec['DEVICE_ID']=$rec['ID'];
 				if(IsSet($datarec['ID'])) {
+					if(isset($datarec['LINKED_OBJECT']) && $datarec['LINKED_OBJECT']!='' && isset($datarec['LINKED_PROPERTY']) && $datarec['LINKED_PROPERTY']!='') {
+						sg($datarec['LINKED_OBJECT'].'.'.$datarec['LINKED_PROPERTY'], $datarec['VALUE'], array($this->name => '0'));
+					}
 					SQLUpdate('dev_sst_cloud_data', $datarec);
 				} else {
 					$datarec['ID']=SQLInsert('dev_sst_cloud_data', $datarec);
