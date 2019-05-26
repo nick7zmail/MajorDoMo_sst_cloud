@@ -160,7 +160,7 @@ function admin(&$out) {
 		$this->saveConfig();
 		$out['LOGINED']='true';
 		$this->cloud_get_all('all');
-		//$this->redirect("?");
+		$this->redirect("?");
 	} else {
 		$out['LOGINERROR']=1;
 		$i=0;
