@@ -136,15 +136,19 @@ function admin(&$out) {
 	curl_setopt($ch, CURLOPT_URL, "$host");
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 	curl_setopt($ch, CURLOPT_HEADER, true);
-	curl_setopt($curl, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 	$response = curl_exec($ch);
-	$response=explode("\r\n\r\n", $response, 2);
-	$headers=$response[0];
-	$body=$response[1];
+	$response=explode("\r\n\r\n", $response);
+	for($i=0; $i<=count($response); $i++) {
+		if(stripos($response[$i], 'HTTP/1.1 200 OK')!==false) {
+			$headers=$response[$i];
+			$body=$response[$i+1];
+			break;
+		}
+	}
 	//[$headers, $body] = explode("\r\n\r\n", $response, 2);
 	curl_close($ch);
-	print_r($headers);
 	$resp=json_decode($body, TRUE);
 	if($resp['key']) {
 		$token = substr($headers, strpos($headers, "csrftoken=")+10, 64);
@@ -156,7 +160,7 @@ function admin(&$out) {
 		$this->saveConfig();
 		$out['LOGINED']='true';
 		$this->cloud_get_all('all');
-		$this->redirect("?");
+		//$this->redirect("?");
 	} else {
 		$out['LOGINERROR']=1;
 		$i=0;

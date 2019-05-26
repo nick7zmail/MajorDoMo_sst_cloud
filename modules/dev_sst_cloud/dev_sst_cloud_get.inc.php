@@ -97,8 +97,16 @@ foreach($houses as $house) {
 				SQLUpdate('dev_sst_cloud_devices', $rec);
 			} else {
 				$rec['ID']=SQLInsert('dev_sst_cloud_devices', $rec);
-			}	
-			foreach($parsed_conf['settings'] as $k=>$v){	
+			}
+			foreach($parsed_conf['settings'] as $k=>$v){
+				$parsed_array[$k]=$v;
+			}
+			foreach($parsed_conf['current_temperature'] as $k=>$v){
+				$k="current.$k";
+				$parsed_array[$k]=$v;
+			}
+			$parsed_array['relay_status']=$parsed_conf['relay_status'];
+			foreach($parsed_array as $k=>$v){	
 				$datarec=SQLSelectOne("SELECT ID, LINKED_OBJECT, LINKED_PROPERTY FROM dev_sst_cloud_data WHERE DEVICE_ID='".$rec['ID']."' AND TITLE='".$k."'");
 				$datarec['TITLE']=$k;
 				$datarec['VALUE']=$v;
@@ -111,7 +119,7 @@ foreach($houses as $house) {
 				} else {
 					$datarec['ID']=SQLInsert('dev_sst_cloud_data', $datarec);
 				}
-			}
+			}	
 		}
 	}
 }

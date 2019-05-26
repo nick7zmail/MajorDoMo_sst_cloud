@@ -32,7 +32,8 @@
 		$res[$i]['HOUSENAME']=$housename['TITLE'];
 		$new_house=$res[$i]['HOUSE'];
 	}
-
+	$res[$i]['IMG']='/img/dev_sst_cloud/'.$res[$i]['TYPE'].'.png';
+	if (!file_exists(ROOT.$res[$i]['IMG'])) $res[$i]['IMG']='/img/dev_sst_cloud/unknown.png';
       /*if ($res[$i]['GROUP'] != $new_group)
       {
          $res[$i]['NEWGROUP']=1;
