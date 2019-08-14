@@ -125,7 +125,7 @@ function admin(&$out) {
  
  if ($this->view_mode=='update_settings') {
 	$login=gr('login');
-	$host='http://api.sst-cloud.com/auth/login/';
+	$host='https://api.sst-cloud.com/auth/login/';
 	$post = [
 		'username' => $login,
 		'password' => gr('pass'),
@@ -172,7 +172,7 @@ function admin(&$out) {
 	}
  }
  if ($this->view_mode=='logout') {
-	$host='http://api.sst-cloud.com/auth/logout/';
+	$host='https://api.sst-cloud.com/auth/logout/';
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, "$host");
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -283,6 +283,18 @@ function usual(&$out) {
   require(DIR_MODULES.$this->name.'/dev_sst_cloud_get.inc.php');
  }
  
+ function metricsModify($param, $val, $out) {
+	if($out=='to_device') { 
+		if((strpos($param, 'status')!==false || $param=='relay_status') && $param!='switches') {
+			$val=($val)? 'on' : 'off';
+		} 
+	} elseif($out=='from_device') {
+		if((strpos($param, 'switch')!==false || $param=='sledOnline') && $param!='switches') {
+			$val=($val=='on')? 1 : 0;
+		} 
+	}
+	return $val;
+ } 
  
  function propertySetHandle($object, $property, $value) {
    $this->getConfig();
@@ -293,7 +305,7 @@ function usual(&$out) {
     for($i=0;$i<$total;$i++) {
 		$id=$properties[$i]['DEVICE_ID'];
 		$device=SQLSelectOne("SELECT CLOUD_ID, HOUSE FROM dev_sst_cloud_devices WHERE ID='".$id."'");
-		$host='http://api.sst-cloud.com/houses/'.$device['HOUSE'].'/devices/'.$device['CLOUD_ID'] .'/';
+		$host='https://api.sst-cloud.com/houses/'.$device['HOUSE'].'/devices/'.$device['CLOUD_ID'] .'/';
      switch ($properties[$i]['TITLE']) {
 		 case 'mode':
 			$host.='mode/';

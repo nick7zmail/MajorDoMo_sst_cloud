@@ -9,7 +9,7 @@
   $this->getConfig();
 //houses
 if($upd=='all' || $upd='houses') {
-	$host='http://api.sst-cloud.com/houses/';
+	$host='https://api.sst-cloud.com/houses/';
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, "$host");
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -40,7 +40,7 @@ $houses=SQLSelect("SELECT * FROM dev_sst_cloud_houses");
 foreach($houses as $house) {
 //groups
 	if($upd='all' || $upd='groups') {
-		$host='http://api.sst-cloud.com/houses/'.$house['HOUSE_ID'].'/groups/';
+		$host='https://api.sst-cloud.com/houses/'.$house['HOUSE_ID'].'/groups/';
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "$host");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -70,7 +70,7 @@ foreach($houses as $house) {
 	}
 //devices
 	if($upd='all' || $upd='devices') {
-		$host='http://api.sst-cloud.com/houses/'.$house['HOUSE_ID'].'/devices/';
+		$host='https://api.sst-cloud.com/houses/'.$house['HOUSE_ID'].'/devices/';
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "$host");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
