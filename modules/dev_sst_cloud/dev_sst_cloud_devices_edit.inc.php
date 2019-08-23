@@ -71,9 +71,6 @@
    }
   }
   }
-  // step: data
-  if ($this->tab=='data') {
-  }
   if ($this->tab=='data') {
    //dataset2
    $new_id=0;

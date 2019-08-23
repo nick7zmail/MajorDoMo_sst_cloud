@@ -15,8 +15,11 @@ if($upd=='all' || $upd='houses') {
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 	curl_setopt($ch, CURLOPT_HEADER, false);
 	
-    curl_setopt($ch, CURLOPT_COOKIE, 'sessionid='.$this->config['SESSIONID'].'; csrftoken='.$this->config['APITOKEN']);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-CSRFToken: '.$this->config['APITOKEN']));
+    //curl_setopt($ch, CURLOPT_COOKIE, 'sessionid='.$this->config['SESSIONID'].'; csrftoken='.$this->config['APITOKEN']);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				'Accept: application/json', 
+				'X-CSRFToken: '.$this->config['APITOKEN'],
+				'Authorization: Token '.$this->config['APIKEY']));
 	curl_setopt($ch, CURLOPT_HTTPGET, TRUE);
 	//curl_setopt($curl, CURLOPT_POST, true);
 	//curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
@@ -46,8 +49,11 @@ foreach($houses as $house) {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		
-		curl_setopt($ch, CURLOPT_COOKIE, 'sessionid='.$this->config['SESSIONID'].'; csrftoken='.$this->config['APITOKEN']);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-CSRFToken: '.$this->config['APITOKEN']));
+		//curl_setopt($ch, CURLOPT_COOKIE, 'sessionid='.$this->config['SESSIONID'].'; csrftoken='.$this->config['APITOKEN']);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				'Accept: application/json', 
+				'X-CSRFToken: '.$this->config['APITOKEN'],
+				'Authorization: Token '.$this->config['APIKEY']));
 		curl_setopt($ch, CURLOPT_HTTPGET, TRUE);
 		//curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
 		//curl_setopt($curl, CURLOPT_POST, true);
@@ -76,8 +82,11 @@ foreach($houses as $house) {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		
-		curl_setopt($ch, CURLOPT_COOKIE, 'sessionid='.$this->config['SESSIONID'].'; csrftoken='.$this->config['APITOKEN']);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-CSRFToken: '.$this->config['APITOKEN']));
+		//curl_setopt($ch, CURLOPT_COOKIE, 'sessionid='.$this->config['SESSIONID'].'; csrftoken='.$this->config['APITOKEN']);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				'Accept: application/json', 
+				'X-CSRFToken: '.$this->config['APITOKEN'],
+				'Authorization: Token '.$this->config['APIKEY']));
 		curl_setopt($ch, CURLOPT_HTTPGET, TRUE);
 		//curl_setopt($curl, CURLOPT_POST, true);
 		//curl_setopt($ch, CURLOPT_POSTFIELDS, $post);

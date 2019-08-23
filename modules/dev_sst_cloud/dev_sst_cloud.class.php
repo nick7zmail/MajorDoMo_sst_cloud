@@ -177,8 +177,11 @@ function admin(&$out) {
 	curl_setopt($ch, CURLOPT_URL, "$host");
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 	curl_setopt($ch, CURLOPT_HEADER, false);
-	curl_setopt($ch, CURLOPT_COOKIE, 'sessionid='.$this->config['SESSIONID'].'; csrftoken='.$this->config['APITOKEN']);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-CSRFToken: '.$this->config['APITOKEN']));
+	//curl_setopt($ch, CURLOPT_COOKIE, 'sessionid='.$this->config['SESSIONID'].'; csrftoken='.$this->config['APITOKEN']);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				'Accept: application/json', 
+				'X-CSRFToken: '.$this->config['APITOKEN'],
+				'Authorization: Token '.$this->config['APIKEY']));
 	curl_setopt($curl, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 	$response = curl_exec($ch);
@@ -326,8 +329,11 @@ function usual(&$out) {
 		curl_setopt($ch, CURLOPT_URL, "$host");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_HEADER, false);
-		curl_setopt($ch, CURLOPT_COOKIE, 'sessionid='.$this->config['SESSIONID'].'; csrftoken='.$this->config['APITOKEN']);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-CSRFToken: '.$this->config['APITOKEN']));
+		//curl_setopt($ch, CURLOPT_COOKIE, 'sessionid='.$this->config['SESSIONID'].'; csrftoken='.$this->config['APITOKEN']);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				'Accept: application/json', 
+				'X-CSRFToken: '.$this->config['APITOKEN'],
+				'Authorization: Token '.$this->config['APIKEY']));
 		//curl_setopt($ch, CURLOPT_HTTPGET, TRUE);
 		curl_setopt($curl, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
