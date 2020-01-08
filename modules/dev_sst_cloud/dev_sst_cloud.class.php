@@ -286,19 +286,6 @@ function usual(&$out) {
   require(DIR_MODULES.$this->name.'/dev_sst_cloud_get.inc.php');
  }
  
- function metricsModify($param, $val, $out) {
-	if($out=='to_device') { 
-		if((strpos($param, 'status')!==false || $param=='relay_status') && $param!='switches') {
-			$val=($val)? 'on' : 'off';
-		} 
-	} elseif($out=='from_device') {
-		if((strpos($param, 'switch')!==false || $param=='sledOnline') && $param!='switches') {
-			$val=($val=='on')? 1 : 0;
-		} 
-	}
-	return $val;
- } 
- 
  function propertySetHandle($object, $property, $value) {
    $this->getConfig();
    $table='dev_sst_cloud_data';
@@ -323,7 +310,7 @@ function usual(&$out) {
 			break;			
 	 }
 		$post = [
-			$properties[$i]['TITLE'] => $value,
+			$properties[$i]['TITLE'] => $this->metricsModify($properties[$i]['TITLE'], $value, 'to_device'),
 		];
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "$host");
@@ -342,6 +329,22 @@ function usual(&$out) {
     }
    }
  }
+ 
+ 
+  function metricsModify($param, $val, $out) {
+	if($out=='to_device') { 
+		if($param=='status' || $param=='relay_status') {
+			$val=($val)? 'on' : 'off';
+		} 
+	} elseif($out=='from_device') {
+		if($param=='status' || $param=='relay_status') {
+			$val=($val=='on')? 1 : 0;
+		} 
+	}
+	return $val;
+ }
+ 
+ 
  function processCycle() {
   $this->cloud_get_all('devices');
  }

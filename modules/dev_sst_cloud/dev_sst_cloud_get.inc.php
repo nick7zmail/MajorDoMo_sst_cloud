@@ -122,7 +122,7 @@ foreach($houses as $house) {
 				$datarec['DEVICE_ID']=$rec['ID'];
 				if(IsSet($datarec['ID'])) {
 					if(isset($datarec['LINKED_OBJECT']) && $datarec['LINKED_OBJECT']!='' && isset($datarec['LINKED_PROPERTY']) && $datarec['LINKED_PROPERTY']!='') {
-						sg($datarec['LINKED_OBJECT'].'.'.$datarec['LINKED_PROPERTY'], $datarec['VALUE'], array($this->name => '0'));
+						sg($datarec['LINKED_OBJECT'].'.'.$datarec['LINKED_PROPERTY'], $this->metricsModify($k, $v, 'from_device'), array($this->name => '0'));
 					}
 					SQLUpdate('dev_sst_cloud_data', $datarec);
 				} else {
