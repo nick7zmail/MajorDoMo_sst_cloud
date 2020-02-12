@@ -114,6 +114,10 @@ foreach($houses as $house) {
 				$k="current.$k";
 				$parsed_array[$k]=$v;
 			}
+			foreach($parsed_conf['status'] as $k=>$v){
+				$k="status.$k";
+				$parsed_array[$k]=$v;
+			}
 			$parsed_array['relay_status']=$parsed_conf['relay_status'];
 			foreach($parsed_array as $k=>$v){	
 				$datarec=SQLSelectOne("SELECT ID, LINKED_OBJECT, LINKED_PROPERTY FROM dev_sst_cloud_data WHERE DEVICE_ID='".$rec['ID']."' AND TITLE='".$k."'");

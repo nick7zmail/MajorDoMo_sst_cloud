@@ -307,6 +307,9 @@ function usual(&$out) {
 		 case 'temperature_manual':
 		 case 'temperature_correction_air':
 			$host.='temperature/';
+			break;
+		 case 'valve_settings':
+			$host.='valve_settings/';
 			break;			
 	 }
 		$post = [
@@ -335,11 +338,15 @@ function usual(&$out) {
 	if($out=='to_device') { 
 		if($param=='status' || $param=='relay_status') {
 			$val=($val)? 'on' : 'off';
-		} 
+		} elseif($param=='valve_settings') {
+			$val=($val)? 'opened' : 'closed';
+		}
 	} elseif($out=='from_device') {
 		if($param=='status' || $param=='relay_status') {
 			$val=($val=='on')? 1 : 0;
-		} 
+		} elseif($param=='valve_settings') {
+			$val=($val=='opened')? 1 : 0;
+		}
 	}
 	return $val;
  }
