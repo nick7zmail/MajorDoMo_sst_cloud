@@ -108,14 +108,17 @@ foreach($houses as $house) {
 				$rec['ID']=SQLInsert('dev_sst_cloud_devices', $rec);
 			}
 			foreach($parsed_conf['settings'] as $k=>$v){
+				if(is_array($v)) {
+					foreach($v as $ke=>$va){
+						$ke="$k.$ke";
+						$parsed_array[$ke]=$va;
+					}
+        				continue;
+				}
 				$parsed_array[$k]=$v;
 			}
 			foreach($parsed_conf['current_temperature'] as $k=>$v){
 				$k="current.$k";
-				$parsed_array[$k]=$v;
-			}
-			foreach($parsed_conf['status'] as $k=>$v){
-				$k="status.$k";
 				$parsed_array[$k]=$v;
 			}
 			$parsed_array['relay_status']=$parsed_conf['relay_status'];
